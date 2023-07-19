@@ -11,22 +11,43 @@ const isAllNumber = (nodes) => nodes
 // 	if (nodeBool) {
 // 		let numVal = Number(node.value);
 // 		console.log(numVal);
-// 		return (numVal > 0 && numVal < 43);
+// 		return (numVal > 0 && numVal < 49);
 // 	}
 // });
-
-
+const convertToIntegers = (nodes) => nodes.map((node) => Number(node.value));
+const isInRange = (digits) => digits.every((digit) => (digit >= 1 && digit <= 49));
+const isNotRedundant = (digits) => new Set(digits).size === digits.length;
 
 btnPlayRef.addEventListener('click', function (event) {
-	if (isAllNotEmpty(inputRefs)) {
 
-		console.log("They all are not empty");
+	if (isAllNotEmpty(inputRefs)) {
 		if (isAllNumber(inputRefs)) {
 			console.log(`OK`);
+			const userDigits = convertToIntegers(inputRefs);
+			if (isInRange(userDigits)) {
+				console.log(`YES`);
+				// let setFrom = new Set(userDigits);
+				// if (setFrom.size === userDigits.length) {
+				// 	console.log(`Done`);
+				// }
+				if (isNotRedundant(userDigits)) {
+					console.log(`Done`);
+				}
+				else {
+					console.log(`Yor numbers are repeated `)
+				}
+			}
+			else {
+				console.log(`The numbers are out of the range`);
+			}
+		}
+		else {
+			console.log(`Numbers are nat a numbers`)
 		}
 	}
 	else {
 		console.log("something is empty");
 	}
 })
+console.log(new Set([1, 2, 3]))
 
